@@ -36,6 +36,12 @@
                         <a href="{{ route('inicio') }}" class="btn btn-sm btn-outline btn-primary mt-4">Cancelar</a>
                     </div>
                 </form>
+                {{-- Enlace de registro --}}
+                <div class="text-center mt-4">
+                    <p>¿No tienes cuenta? 
+                        <a href="{{ route('registro') }}" class="text-primary">Regístrate aquí</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

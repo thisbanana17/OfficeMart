@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {   
+    // Constructor que aplica el middleware de autenticación
+    public function __construct()
+    {
+        // Asegura que el usuario esté autenticado para acceder a cualquier acción en este controlador
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +30,7 @@ class ProductoController extends Controller
     public function create()
     {
         $categorias = Categoria::orderBy('nombre')->get();
-        //si no existen categorias, redirigir a la vista de creación de categorias
+        // Si no existen categorías, redirigir a la vista de creación de categorías
         if ($categorias->isEmpty()) {
             return redirect()->route('categorias.create')->with('info', 'Primero debes crear una categoría');
         }
@@ -36,9 +43,9 @@ class ProductoController extends Controller
     public function store(Request $request)
     {       
         Producto::create($request->all());
-        //Guardar imagen
+        // Guardar imagen
         $producto = Producto::latest('id')->first();
-        $imageName= 'producto_'.$producto->id.'.'.$request->imagen->extension();
+        $imageName = 'producto_' . $producto->id . '.' . $request->imagen->extension();
         $request->imagen->move(public_path('images/productos'), $imageName);
         return redirect()->route('productos.index')->with('info', 'Producto creado con éxito');
     }
@@ -66,15 +73,14 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         $producto->update($request->all());
-        //Actualizar imagen si existe
+        // Actualizar imagen si existe
         if ($request->imagen) {
             $request->validate([
                 'imagen' => 'image|max:4096',
-            ],
-            [
+            ], [
                 'imagen.max' => 'La imagen del producto no debe pesar más de 4MB'
             ]);
-            $imageName= 'producto_'.$producto->id.'.'.$request->imagen->extension();
+            $imageName = 'producto_' . $producto->id . '.' . $request->imagen->extension();
             $request->imagen->move(public_path('images/productos'), $imageName);
         }
         return redirect()->route('productos.index')->with('info', 'Producto actualizado con éxito');
@@ -86,11 +92,13 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         $producto->delete();
-        //eliminar imagen si existe
-        if (file_exists(public_path('images/productos/producto_'.$producto->id.'.jpg'))) {
-            unlink(public_path('images/productos/producto_'.$producto->id.'.jpg'));
+        // Eliminar imagen si existe
+        if (file_exists(public_path('images/productos/producto_' . $producto->id . '.jpg'))) {
+            unlink(public_path('images/productos/producto_' . $producto->id . '.jpg'));
         }
         return redirect()->route('productos.index')->with('info', 'Producto eliminado con éxito');
     }
 }
+
+
 
