@@ -4,7 +4,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25" />
       </svg>
       
-      <a href="{{route('inicio')}}" class="btn btn-ghost btn-sm normal-case text-sm">OfficeMart</a>
+      <a href="{{route('inicio')}}" class="btn btn-ghost btn-sm normal-case text-sm bg-blue-950">OfficeMart</a>
     </div>
     <div class="flex-none">
       @auth
@@ -40,8 +40,8 @@
         </div>
       @else
         <ul class="menu menu-horizontal px-1 mr-6 space-x-4">
-          <li><a href="{{ route('login') }}" class="btn btn-sm btn-outline normal-case">Iniciar sesión</a></li>
-          <li><a href="{{ route('registro') }}" class="btn btn-sm btn-outline normal-case">Registrarse</a></li>
+          <li><a href="{{ route('login') }}" class="btn btn-sm btn-outline normal-case bg-blue-950">Iniciar sesión</a></li>
+          <li><a href="{{ route('registro') }}" class="btn btn-sm btn-outline normal-case bg-blue-950">Registrarse</a></li>
         </ul>
       @endauth
     </div>

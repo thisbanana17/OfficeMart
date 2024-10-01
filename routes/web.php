@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\AutenticaController;
@@ -27,11 +28,11 @@ Route::resource('/categorias', CategoriaController::class)->except(['show']);
 Route::resource('/productos', ProductoController::class);
 
 //Ruta de registro de usuarios
-route::view('/registro', 'autenticacion.registro')->name('registro');
+route::view('/registro', 'auth.registro')->name('registro');
 route::post('/registro', [AutenticaController::class, 'registro'])->name('registro.store');
 
 //Ruta de login de usuarios
-route::view('/login', 'autenticacion.login')->name('login');
+route::view('/login', 'auth.login')->name('login');
 route::post('/login', [AutenticaController::class, 'login'])->name('login.store');
 //Ruta de logout de usuarios
 route::post('/logout', [AutenticaController::class, 'logout'])->name('logout');
@@ -44,3 +45,8 @@ Route::put('/perfil/password/{user}', [AutenticaController::class, 'passwordUpda
 //Rutas para pedidos
 Route::resource('/pedidos', PedidoController::class)->except(['create']);
 Route::get('/pedidos/create/{producto}', [PedidoController::class, 'create'])->name('pedidos.create');
+
+auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+auth::routes(['verify' => true]);

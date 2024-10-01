@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('titulo', 'Listar Pedidos')
-@section('cabecera', 'Listar Pedidos')
+@section('cabecera', 'Lista de Pedidos')
 
 @section('contenido')
     <div class="flex justify-center">

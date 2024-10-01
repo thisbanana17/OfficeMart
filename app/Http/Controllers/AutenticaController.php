@@ -69,7 +69,7 @@ class AutenticaController extends Controller
 
     public function perfil(){
         $user = auth()->user();
-        return view('autenticacion.perfil', compact('user'));
+        return view('auth.perfil', compact('user'));
     }
 
     public function perfilUpdate(Request $request, User $user){

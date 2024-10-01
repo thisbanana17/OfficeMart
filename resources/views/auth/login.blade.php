@@ -14,8 +14,8 @@
                         @endforeach
                     @endif
                 </div>
-                <form action="{{route('login.store')}}" method="POST">
-                    @csrf
+                <form action="{{ route('login') }}" method="POST">
+ @csrf
                     {{-- Email --}}
                     <div class="form-control">
                         <label class="label" for="email">
@@ -41,8 +41,11 @@
                     <p>¿No tienes cuenta? 
                         <a href="{{ route('registro') }}" class="text-primary">Regístrate aquí</a>
                     </p>
+                    <a href="{{ route('password.request') }}" class="link">¿Olvidaste tu contraseña?</a>
+
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
